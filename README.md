@@ -1,3 +1,14 @@
+## Personal Intro
+Hi! I'm Nathan Morrison. This is a project of mine to learn and play with Flask
+and Google App Engine. I plan to leave comments in my code to discuss things as
+I'm learning, so if you find that helpful, feel free to take a look.
+
+This all started with the appengine-try-python-flask.zip I downloaded from the
+App Engine website on 2015-08-08.
+
+The readme that came with the sample code follows below.
+
+
 ## Python Flask Skeleton for Google App Engine
 
 A skeleton for building Python applications on Google App Engine with the
