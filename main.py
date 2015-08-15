@@ -13,6 +13,12 @@ def hello():
 				+ '<br>Content is likely to change drastically without warning.' \
 				+ '<br><br>What are you doing here, anyway?'
 
+@app.route('/about/')
+def about_message():
+	with open('static/about_msg.htm','r') as f:
+		about_msg_str = f.read()
+	
+	return about_msg_str
 
 @app.errorhandler(404)
 def page_not_found(e):
