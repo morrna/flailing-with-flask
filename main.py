@@ -13,7 +13,7 @@ def hello():
 
 @app.route('/about/')
 def about_message():
-	with open('static/about_msg.htm','r') as f:
+	with open('content/about_msg.htm','r') as f:
 		about_msg_str = f.read()
 	
 	return about_msg_str

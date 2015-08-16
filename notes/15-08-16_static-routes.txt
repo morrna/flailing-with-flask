@@ -1,0 +1,12 @@
+Changed /static/ folder to /content/, to prevent files from being exposed.
+
+Static files are files whose routes in the app's filesystem are exposed
+transparently to clients. This is useful for stylesheets and image files,
+so I've read, but is not where I want to keep helper files for organizing
+pieces of text etc.
+
+It turns out that Google App Engine automatically recognizes a folder named
+/static/ as a directory with the static_dir attribute, despite having no
+entry in app.yaml. I was not able to find documentation of this fact, but
+that is how it is behaving. The relevant page to start with for docs is:
+https://cloud.google.com/appengine/docs/python/gettingstartedpython27/staticfiles
