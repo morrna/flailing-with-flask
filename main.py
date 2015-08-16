@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -9,9 +9,7 @@ app.config['DEBUG'] = True
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    return 'Hello! This is a personal project owned by Nathan Morrison.' \
-				+ '<br>Content is likely to change drastically without warning.' \
-				+ '<br><br>What are you doing here, anyway?'
+    return render_template("front_door.html")
 
 @app.route('/about/')
 def about_message():
