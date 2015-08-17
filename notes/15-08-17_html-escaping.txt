@@ -1,0 +1,16 @@
+Created simple_page template, discovered Flask's HTML escaping
+
+I wrote simple_page to load some content inside of a div, and on first run
+discovered that the content, which contained p and a tags, was not rendered.
+All the characters had been escaped so that the tags showed up in the site text.
+It turns out that Flask sets auto-escaping in Jinja2 by default when loading a
+template that ends in htm or html. This is easily disabled by placing the 
+'|safe' tag next to the variable name in the template.
+
+This did get me thinking - maybe I'm going about organizing this wrong. Content
+static to the site may be better passed around through template inheritance or 
+HTML inclusion. Perhaps Python should only handle content that is truly
+dynamic. Then again, it's not hard to mark which places in the template should
+accept unescaped HTML input and which should not, so it might not be a problem
+to pass HTML through Python if it's handled right. Sometime soon I should try to
+find information about usage conventions to read up on.

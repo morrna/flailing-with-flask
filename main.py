@@ -8,7 +8,7 @@ app.config['DEBUG'] = True
 
 @app.route('/')
 def hello():
-    """Return a friendly HTTP greeting."""
+    "Displays front page."
     return render_template("front_door.html")
 
 @app.route('/about/')
@@ -16,7 +16,8 @@ def about_message():
 	with open('content/about_msg.htm','r') as f:
 		about_msg_str = f.read()
 	
-	return about_msg_str
+	return render_template("simple_page.html", pagetitle="About"
+								, content=about_msg_str)
 
 @app.errorhandler(404)
 def page_not_found(e):
