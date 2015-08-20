@@ -1,0 +1,7 @@
+created new '/wall/' route to try forms
+
+After reading up on forms in the Flask quickstart, I decided to start
+implementing a simple wall for posting a limited number of messages so I could
+get a hang of request objects and so on. I quickly became overwhelmed by trying
+to figure out how to store the data, so for right now I settled on just leaving
+the route with an "under construction" page.
