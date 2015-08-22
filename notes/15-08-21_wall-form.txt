@@ -1,0 +1,4 @@
+successfully added input form to wall_page
+
+This page was useful in explaining forms and HTTP methods:
+http://www.w3schools.com/tags/att_form_method.asp

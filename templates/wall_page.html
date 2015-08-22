@@ -1,6 +1,12 @@
 {% extends "simple_page.html" %}
 {% block guts %}
 
+<form method='post'>
+	Add something here:
+	<input type="text" name="new_message">
+	<input type="submit" value="Post">
+</form>
+
 {% if my_wall.messages %}
 	<ul>
 	{% for message in my_wall.messages %}

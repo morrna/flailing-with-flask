@@ -32,7 +32,8 @@ def wall_page():
 
     if request.method == 'POST':
         my_wall.add_message(request.form["new_message"])
-        return fl.redirect(fl.url_for("wall_page"))
+        ## May not be needed if template is rendered after anyway.
+        #return fl.redirect(fl.url_for("wall_page"))
 
     return render_template('wall_page.html', pagetitle='Wall', my_wall=my_wall)
 
