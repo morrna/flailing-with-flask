@@ -1,0 +1,14 @@
+{% extends "simple_page.html" %}
+{% block guts %}
+
+{% if my_wall.messages %}
+	<ul>
+	{% for message in my_wall.messages %}
+		<li> {{ message }} </li>
+	{% endfor %}
+	</ul>
+{% else %}
+No wall messages yet!
+{% endif %}
+
+{% endblock guts %}

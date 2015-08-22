@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title> {{ pagetitle }} </title>
+<title> {% block title %} {{ pagetitle }} {% endblock %}</title>
 </head>
 
 <body>
-	<h1> {{ pagetitle }} </h1>
-	<div> {{ content|safe }} </div>
+	<h1> {% block header %} {{ pagetitle }} {% endblock %} </h1>
+	<div> {% block guts %} {{ content|safe }} {% endblock %} </div>
 </body>
 <html>

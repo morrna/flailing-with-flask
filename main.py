@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import flask as fl
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -21,22 +22,27 @@ def about_message():
 
 @app.route('/wall/', methods=['POST', 'GET'])
 def wall_page():
-    ## Temporarily deter interlopers
-    excuse_msg = "Sorry, but I'm not done figuring this part out yet." \
-            + " Come back later!"
-    return render_template("simple_page.html"
-                            , pagetitle = "Under Construction"
-                            , content = excuse_msg
-                            )
+#    ## Temporarily deter interlopers
+#    excuse_msg = "Sorry, but I'm not done figuring this part out yet." \
+#            + " Come back later!"
+#    return render_template("simple_page.html"
+#                            , pagetitle = "Under Construction"
+#                            , content = excuse_msg
+#                            )
 
     if request.method == 'POST':
         my_wall.add_message(request.form["new_message"])
+        return fl.redirect(fl.url_for("wall_page"))
+
+    return render_template('wall_page.html', pagetitle='Wall', my_wall=my_wall)
 
 
 @app.errorhandler(404)
 def page_not_found(e):
     """Return a custom 404 error."""
-    return 'Sorry, nothing at this URL.', 404
+    return render_template('simple_page.html', pagetitle = '404 error' \
+            , content='Sorry, nothing at this URL.') \
+            , 404
 
 ### Tools etc.
 class Wall:
