@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Welcome to my scratchpad!</title>
-</head>
+{% extends "simple_page.html" %}
 
-<body>
+{% block title %}
+Flailing with Flask
+{% endblock title %}
 
-<h1>Hello</h1>
-<div>
-What is this?
-<a href="/about/">Find out here.</a>
-</div>
+{% block header %}
+Welcome to my scratchpad!
+{% endblock header %}
 
-</body>
-</html>
+{% block guts %}
+<p>
+	What is this?
+	<a href="/about/">Find out here.</a>
+</p>
+<p>
+	I made a wall!
+	(Sort of.)
+	<a href="/wall/">Write on it here.</a>
+</p>
+{% endblock guts %}
