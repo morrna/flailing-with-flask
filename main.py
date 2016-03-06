@@ -1,3 +1,5 @@
+from google.appengine.api import users
+
 from flask import Flask, render_template, request
 import flask as fl
 app = Flask(__name__)
@@ -19,6 +21,22 @@ def about_message():
     
     return render_template("simple_page.html", pagetitle="About"
                                 , content=about_msg_str)
+
+@app.route('/user/')
+def user_profile():
+    user = users.get_current_user()
+
+    if user:
+        user_message = 'Hello ' + user.nickname() + ', good to see you!'
+    else:
+        user_message = 'Good day Mr./Ms. Anonymous!' \
+                + ' <a href="' + users.create_login_url(request.url) + \
+                '">Log in</a> with a Google account to change this message.'
+
+    return render_template('simple_page.html', pagetitle = 'User' \
+                            , content = user_message )
+
+
 
 @app.route('/wall/', methods=['POST', 'GET'])
 def wall_page():
