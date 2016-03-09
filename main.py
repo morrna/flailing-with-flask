@@ -1,4 +1,5 @@
 from google.appengine.api import users
+from google.appengine.ext import ndb
 
 from flask import Flask, render_template, request
 import flask as fl
@@ -62,6 +63,21 @@ def page_not_found(e):
     return render_template('simple_page.html', pagetitle = '404 error' \
             , content='Sorry, nothing at this URL.') \
             , 404
+
+WALL_NAME = 'default_wall'
+
+def wall_key(this_name = WALL_NAME):
+    return ndb.Key('Wall_of_Posts', this_name)
+
+class Post_Author(ndb.Model):
+    nickname = ndb.StringProperty(indexed=False)
+    email = ndb.StringProperty(indexed=False)
+    linkto = ndb.StringProperty(indexed=False)
+
+class Wall_Post(ndb.Model):
+    text = ndb.TextProperty()
+    time = ndb.DateTimeProperty(auto_now_add=True)
+    author = ndb.StructuredProperty(Post_Author)
 
 ### Tools etc.
 class Wall:
