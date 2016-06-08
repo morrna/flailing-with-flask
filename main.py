@@ -71,8 +71,6 @@ def wall_key(this_name = WALL_NAME):
 
 class Post_Author(ndb.Model):
     nickname = ndb.StringProperty(indexed=False)
-    email = ndb.StringProperty(indexed=False)
-    linkto = ndb.StringProperty(indexed=False)
 
 class Wall_Post(ndb.Model):
     text = ndb.TextProperty()
