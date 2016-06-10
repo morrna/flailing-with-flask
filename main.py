@@ -90,9 +90,16 @@ class Wall:
         self.messages = []
 
     def add_message(self, message):
-        self.messages.append(message)
-        if len(self.messages) > self.max_messages:
-            self.messages.pop(0)
+        new_post = Wall_Post(parent=wall_key())
+        # Add parent key as attribute of Wall? It could perhaps be set on instantiation.
+
+        if users.get_current_user():
+            new_post.author = Post_Author( nickname = users.get_current_user().user_id() )
+        else:
+            new_post.author = Post_Author( nickname = "someone anonymous" )
+
+        new_post.text = message
+        new_post.put()
 
 
 my_wall = Wall()
