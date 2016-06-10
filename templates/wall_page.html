@@ -9,8 +9,12 @@
 
 {% if my_wall.messages %}
 	<ul>
-	{% for message in my_wall.messages %}
-		<li> {{ message }} </li>
+	{% for post in my_wall.messages %}
+		<li> {{ post.text }}
+		<ul>
+			<li> by {{ post.author.nickname }} at {{ post.time }}
+		</ul>
+	  	</li>
 	{% endfor %}
 	</ul>
 {% else %}

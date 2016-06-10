@@ -54,6 +54,8 @@ def wall_page():
         ## May not be needed if template is rendered after anyway.
         #return fl.redirect(fl.url_for("wall_page"))
 
+    my_wall.load_messages()
+
     return render_template('wall_page.html', pagetitle='Wall', my_wall=my_wall)
 
 
@@ -85,12 +87,13 @@ class Wall:
     For now, the messages are not persistent.
     """
 
-    def __init__(self):
+    def __init__(self, name_of_wall = WALL_NAME):
         self.max_messages = 12
         self.messages = []
+        self.wall_name = name_of_wall
 
     def add_message(self, message):
-        new_post = Wall_Post(parent=wall_key())
+        new_post = Wall_Post(parent=wall_key(self.wall_name))
         # Add parent key as attribute of Wall? It could perhaps be set on instantiation.
 
         if users.get_current_user():
@@ -100,6 +103,13 @@ class Wall:
 
         new_post.text = message
         new_post.put()
+
+    def load_messages(self):
+        
+        post_query = Wall_Post.query( ancestor=wall_key(self.wall_name) ).order(-Wall_Post.time)
+        self.messages = post_query.fetch(self.max_messages)
+
+
 
 
 my_wall = Wall()
