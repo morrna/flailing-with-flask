@@ -1,6 +1,12 @@
 {% extends "simple_page.html" %}
 {% block guts %}
 
+<p>
+	This wall uses the Google App Engine datastore to store posts.
+	You may post anonymously,
+	or you may <a href="/user/">log in with a Google Account</a>.
+</p>
+
 <form method='post'>
 	Add something here:
 	<input type="text" name="new_message">

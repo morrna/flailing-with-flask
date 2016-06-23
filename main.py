@@ -97,7 +97,7 @@ class Wall:
         # Add parent key as attribute of Wall? It could perhaps be set on instantiation.
 
         if users.get_current_user():
-            new_post.author = Post_Author( nickname = users.get_current_user().user_id() )
+            new_post.author = Post_Author( nickname = users.get_current_user().nickname() )
         else:
             new_post.author = Post_Author( nickname = "someone anonymous" )
 
