@@ -1,0 +1,7 @@
+Basic OAuth setup
+
+Created OAuth2 credentials for project.
+Excluded credentials from repo.
+Excluded .gitignore from repo to keep files safe, and because I don't know a way to publish them if
+they're not in this folder.
+Created currently empty /oauth2callback path, which right now redirects to root.

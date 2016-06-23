@@ -58,6 +58,9 @@ def wall_page():
 
     return render_template('wall_page.html', pagetitle='Wall', my_wall=my_wall)
 
+@app.route('/oauth2callback/')
+def oauth2callback():
+    return fl.redirect('/')
 
 @app.errorhandler(404)
 def page_not_found(e):
