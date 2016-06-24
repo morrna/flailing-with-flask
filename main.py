@@ -1,6 +1,8 @@
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
+from oauth2client import client
+
 from flask import Flask, render_template, request
 import flask as fl
 app = Flask(__name__)
@@ -13,10 +15,12 @@ app.config['DEBUG'] = True
 @app.route('/')
 def hello():
     "Displays front page."
+    fl.session['current_resource'] = 'hello'
     return render_template("front_door.html")
 
 @app.route('/about/')
 def about_message():
+    fl.session['current_resource'] = 'about_message'
     with open('content/about_msg.htm','r') as f:
         about_msg_str = f.read()
     
@@ -25,6 +29,8 @@ def about_message():
 
 @app.route('/user/')
 def user_profile():
+
+    fl.session['current_resource'] = 'user_profile'
     user = users.get_current_user()
 
     if user:
@@ -48,6 +54,7 @@ def wall_page():
 #                            , pagetitle = "Under Construction"
 #                            , content = excuse_msg
 #                            )
+    fl.session['current_resource'] = 'wall_page'
 
     if request.method == 'POST':
         my_wall.add_message(request.form["new_message"])
@@ -57,10 +64,6 @@ def wall_page():
     my_wall.load_messages()
 
     return render_template('wall_page.html', pagetitle='Wall', my_wall=my_wall)
-
-@app.route('/oauth2callback/')
-def oauth2callback():
-    return fl.redirect('/')
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -113,7 +116,30 @@ class Wall:
         self.messages = post_query.fetch(self.max_messages)
 
 
-
-
 my_wall = Wall()
+
+
+### Stuff for Google Drive reader below here.
+### I should remake the project into package style, but I'm not doing that now.
+
+
+
+@app.route('/oauth2callback/')
+def oauth2callback():
+    OAflow = client.flow_from_clientsecrets(
+            "credentials/client_secret.json",
+            scope = "https://www.googleapis.com/auth/drive.metadata.readonly",
+            redirect_uri = fl.url_for("oauth2callback", _external=True)
+            )
+    if 'code' not in fl.request.args:
+        auth_url = OAflow.step1_get_authorize_url()
+        return fl.redirect(auth_url)
+    else:
+        auth_code = fl.request.args.get('code')
+        creds = OAflow.step2_exchange(auth_code)
+        fl.session['credentials'] = creds.to_json()
+        return fl.redirect(fl.url_for(fl.session['current_resource']))
+
+
+
 

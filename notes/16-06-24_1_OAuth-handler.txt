@@ -1,0 +1,8 @@
+Set up handler for OAuth; as yet untested
+
+/oauth2callback follows closely with form found here:
+https://developers.google.com/api-client-library/python/auth/web-app#example
+
+I also created the 'current_resource' entry in fl.session .
+The reasoning is that multiple pages should be able to redirect to /oauth2callback if needed, and
+afterward the user should be directed back to where they left.
