@@ -146,5 +146,20 @@ def oauth2callback():
         return fl.redirect(fl.url_for(fl.session['current_resource']))
 
 
+@app.route('/gdrive-read/')
+def gdrive_read():
+    """
+    This route uses Google Drive API
+    """
+    
+    fl.session['current_resource'] = 'gdrive_read'
+
+    ## Is user logged in with OAuth2?
+    if 'credentials' not in flask.session:
+        return render_template("gdrive-read_noauth.html")
+    else:
+        ## more stuff to go here soon
+        return render_template("gdrive-read_authed.html")
+
 
 

@@ -1,0 +1,15 @@
+{% extends "gdrive-read_common.html" %}
+
+{% block guts %}
+<p>
+	This page will read some metadata from your Google Drive files and display it here.
+</p>
+<p>
+	Looks like you're not authenticated yet.
+	<a href="/oauth2callback/">
+	Click here</a>
+	to be logged in with 
+	<a href="https://developers.google.com/api-client-library/python/auth/web-app">
+	OAuth 2.0</a>.
+</p>
+{% endblock guts %}
