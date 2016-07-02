@@ -155,7 +155,7 @@ def gdrive_read():
     fl.session['current_resource'] = 'gdrive_read'
 
     ## Is user logged in with OAuth2?
-    if 'credentials' not in flask.session:
+    if 'credentials' not in fl.session:
         return render_template("gdrive-read_noauth.html")
     else:
         ## more stuff to go here soon
