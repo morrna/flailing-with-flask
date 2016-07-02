@@ -11,7 +11,12 @@ app.config['DEBUG'] = True
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
 
-### 
+### Session setup
+with open('credentials/session_key', 'rb') as f:
+    app.secret_key = f.read()
+
+
+###  Routes
 @app.route('/')
 def hello():
     "Displays front page."
